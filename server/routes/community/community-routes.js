@@ -63,4 +63,26 @@ router.post('/events', async (req, res) => {
     }
   });
 
+  router.delete('/events/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Event.findByIdAndDelete(id);
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to delete event' });
+  }
+});
+
+router.delete('/events/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+      await Event.findByIdAndDelete(id);
+      res.json({ success: true });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Failed to delete event' });
+    }
+  });
+
 module.exports = router;
