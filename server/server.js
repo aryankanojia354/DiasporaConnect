@@ -65,4 +65,8 @@ app.use("/api/shop/review", shopReviewRouter);
 
 app.use("/api/common/feature", commonFeatureRouter);
 
+
+const communityRouter = require("./routes/community/community-routes");
+app.use("/api", communityRouter);
+
 app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));
