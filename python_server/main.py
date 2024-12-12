@@ -6,7 +6,8 @@ from typing import Dict
 from ollama import Client
 
 # Ollama client setup
-client = Client(host='http://localhost:11434')  # Replace with your Ollama server URL if different
+# client = Client(host='http://localhost:11434')
+client = Client(host='https://winning-sparrow-gently.ngrok-free.app')
 
 model_en = 'llama3.2'
 model_hi = 'SL-Lexicons/llama3-hindi-8b-q5_km.gguf:latest'
