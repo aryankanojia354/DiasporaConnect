@@ -323,7 +323,7 @@ function ShoppingHome() {
                       className="w-full h-[250px] object-cover rounded-lg"
                     />
                     </Link>
-                    <div className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white text-sm px-2 py-1 transition-opacity opacity-0 hover:opacity-100">
+                    <div className="absolute bottom-4 rounded-lg font-bold  left-20 bg-white  text-black text-sm px-2 py-1  opacity-100 transition-transform duration-300 ease-in-out transform hover:scale-125">
                       {img.overlayText}
                     </div>
                   </div>
@@ -384,7 +384,7 @@ function ShoppingHome() {
                 <li>
                   <a href="/returns" className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900">
                     Returns
-                  </a>
+                  </a> 
                 </li>
                 <li>
                   <a href="/shipping" className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900">
