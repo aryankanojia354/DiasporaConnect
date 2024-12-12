@@ -79,6 +79,7 @@ const Community = () => {
   };
 
   const handleDeleteMessage = async (id) => {
+    console.log('Deleting message with ID:', id); // Debugging line
     try {
       const res = await axios.delete(`http://localhost:5000/api/messages/${id}`);
       if (res.data.success) {
@@ -91,6 +92,7 @@ const Community = () => {
       alert("Failed to delete message");
     }
   };
+  
 
   // Event handlers
   const handleEventChange = (e, index) => {

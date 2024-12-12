@@ -8,17 +8,17 @@ const router = express.Router();
 router.delete('/messages/:id', async (req, res) => {
   const { id } = req.params;
   try {
-    const message = await Message.findById(id);
+    const message = await Message.findByIdAndDelete(id);
     if (!message) {
       return res.status(404).json({ error: 'Message not found' });
     }
-    await message.remove();
     res.json({ success: true });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to delete message' });
   }
 });
+
 
 // GET all events
 router.get('/events', async (req, res) => {
