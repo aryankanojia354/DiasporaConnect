@@ -317,7 +317,7 @@ function ShoppingHome() {
                 {[...scrollingImages, ...scrollingImages].map((img, idx) => (
                   <div key={idx} className="relative flex-shrink-0">
                   <Link to={`/seller-info/${img.sellerInfoId}`}>
-                    <img
+                    <img 
                       src={img.src}
                       alt={img.alt}
                       className="w-full h-[250px] object-cover rounded-lg"

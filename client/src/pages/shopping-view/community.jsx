@@ -92,7 +92,6 @@ const Community = () => {
       alert("Failed to delete message");
     }
   };
-  
 
   // Event handlers
   const handleEventChange = (e, index) => {
@@ -161,11 +160,11 @@ const Community = () => {
   return (
     <div className="max-w-screen-xl mx-auto p-5 font-sans">
       {/* Welcome Section */}
-      <section className="mb-8 p-6 rounded-lg shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+      <section className="mb-8 p-6 rounded-lg shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white border border-gray-300">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-4xl font-extrabold">Welcome to Our Community!</h1>
           {username && (
-            <div className="bg-white text-purple-600 px-4 py-2 rounded-full font-semibold">
+            <div className="bg-white text-purple-600 px-4 py-2 rounded-full font-semibold border border-gray-300">
               Logged in as: {username}
             </div>
           )}
@@ -174,13 +173,13 @@ const Community = () => {
       </section>
 
       {/* Events Section */}
-      <section className="mb-8">
+      <section className="mb-8 border border-gray-300 rounded-lg p-6 shadow-md">
         <h2 className="text-3xl font-semibold mb-6 text-gray-800 border-b-2 border-gray-300 pb-2">
           Events and Announcements
         </h2>
         <div className="grid gap-6">
           {events.map((event, index) => (
-            <div key={event._id} className="bg-white p-6 rounded-lg shadow-md transition-transform hover:scale-105">
+            <div key={event._id} className="bg-white p-6 rounded-lg shadow-md transition-transform hover:scale-105 border border-gray-300">
               {event.isEditing ? (
                 <div>
                   <input
@@ -232,7 +231,7 @@ const Community = () => {
         </div>
 
         {/* Add New Event Form */}
-        <div className="bg-white p-6 rounded-lg shadow-md mt-8">
+        <div className="bg-white p-6 rounded-lg shadow-md mt-8 border border-gray-300">
           <h3 className="text-2xl font-bold text-gray-800 mb-4">Add a New Event</h3>
           <input
             type="text"
@@ -263,7 +262,7 @@ const Community = () => {
       </section>
 
       {/* Chat Section */}
-      <section className="mb-8 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg p-6 shadow-lg text-white">
+      <section className="mb-8 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg p-6 shadow-lg text-white border border-gray-300">
         <h2 className="text-3xl font-semibold mb-4">Community Chat</h2>
         {isLoading ? (
           <div className="text-center">Loading...</div>
@@ -278,7 +277,7 @@ const Community = () => {
                 <p className="text-gray-500 text-center">No messages yet. Start the conversation!</p>
               ) : (
                 messages.map((message) => (
-                  <div key={message._id} className={`p-3 my-2 rounded-lg ${message.username === username ? 'bg-blue-100 ml-auto' : 'bg-gray-100'}`}>
+                  <div key={message._id} className={`p-3 my-2 rounded-lg ${message.username === username ? 'bg-blue-100 ml-auto' : 'bg-gray-100'} border border-gray-300`}>
                     <div className="flex justify-between items-center">
                       <div>
                         <p><strong>{message.username}</strong>: {message.text}</p>
@@ -317,7 +316,7 @@ const Community = () => {
       </section>
 
       {/* Rewards Section */}
-      <section className="mb-8">
+      <section className="mb-8 border border-gray-300 rounded-lg p-6 shadow-md">
         <h2 className="text-3xl font-semibold mb-4 text-gray-800">Rewards for Active Members</h2>
         <p className="text-gray-700">
           Earn points for participation and redeem them for discounts. Collect badges for achievements like "Top Contributor" and "Helpful Reviewer."
