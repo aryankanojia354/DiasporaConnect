@@ -116,39 +116,22 @@ const Community = () => {
   };
 
   return (
-    <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "20px", fontFamily: "Arial, sans-serif" }}>
+    <div className="max-w-screen-xl mx-auto p-5 font-sans">
       {/* Welcome Section */}
-      <section
-        style={{
-          marginBottom: "30px",
-          backgroundColor: "#f9f9f9",
-          padding: "20px",
-          borderRadius: "8px",
-          boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <h1 style={{ fontSize: "36px", color: "#333" }}>Welcome to Our Community!</h1>
-        <p style={{ fontSize: "18px", color: "#555" }}>
+      <section className="mb-8 bg-gray-100 p-5 rounded-lg shadow-md">
+        <h1 className="text-4xl font-bold text-gray-800">Welcome to Our Community!</h1>
+        <p className="text-lg text-gray-600 mt-2">
           Connect, share, and grow with fellow shoppers. Join discussions, get tips, and explore exciting topics related
           to your favorite products.
         </p>
       </section>
 
       {/* Events and Announcements Section */}
-      <section style={{ marginBottom: "30px" }}>
-        <h2 style={{ fontSize: "24px", marginBottom: "10px", color: "#333" }}>Events and Announcements</h2>
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4 text-gray-800">Events and Announcements</h2>
         <div>
           {events.map((event, index) => (
-            <div
-              key={event._id}
-              style={{
-                background: "#fff",
-                padding: "20px",
-                marginBottom: "15px",
-                borderRadius: "8px",
-                boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
-              }}
-            >
+            <div key={event._id} className="bg-white p-5 mb-4 rounded-lg shadow-md">
               {event.isEditing ? (
                 <div>
                   <input
@@ -156,97 +139,49 @@ const Community = () => {
                     name="title"
                     value={event.title}
                     onChange={(e) => handleEventChange(e, index)}
-                    style={{
-                      padding: "10px",
-                      borderRadius: "8px",
-                      border: "1px solid #ddd",
-                      marginBottom: "10px",
-                      width: "100%",
-                    }}
+                    className="w-full p-2 mb-3 rounded-lg border border-gray-300"
                   />
                   <textarea
                     name="description"
                     value={event.description}
                     onChange={(e) => handleEventChange(e, index)}
-                    style={{
-                      padding: "10px",
-                      borderRadius: "8px",
-                      border: "1px solid #ddd",
-                      marginBottom: "10px",
-                      width: "100%",
-                      minHeight: "100px",
-                    }}
+                    className="w-full p-2 mb-3 rounded-lg border border-gray-300 h-24"
                   />
                   <input
                     type="date"
                     name="date"
                     value={event.date}
                     onChange={(e) => handleEventChange(e, index)}
-                    style={{
-                      padding: "10px",
-                      borderRadius: "8px",
-                      border: "1px solid #ddd",
-                      marginBottom: "10px",
-                      width: "100%",
-                    }}
+                    className="w-full p-2 mb-3 rounded-lg border border-gray-300"
                   />
                   <button
                     onClick={() => handleSaveEvent(index)}
-                    style={{
-                      padding: "10px 20px",
-                      backgroundColor: "#28a745",
-                      color: "#fff",
-                      border: "none",
-                      borderRadius: "8px",
-                      cursor: "pointer",
-                      marginRight: "10px",
-                    }}
+                    className="px-4 py-2 mr-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
                   >
                     Save
                   </button>
                   <button
                     onClick={() => handleDeleteEvent(index)}
-                    style={{
-                      padding: "10px 20px",
-                      backgroundColor: "#dc3545",
-                      color: "#fff",
-                      border: "none",
-                      borderRadius: "8px",
-                      cursor: "pointer",
-                    }}
+                    className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
                   >
                     Delete
                   </button>
                 </div>
               ) : (
                 <div>
-                  <h3 style={{ fontSize: "20px", fontWeight: "bold", color: "#333" }}>{event.title}</h3>
-                  <p style={{ color: "#555" }}>{event.description}</p>
-                  <p style={{ fontSize: "14px", color: "#888", marginBottom: "10px" }}>Date: {event.date}</p>
-                  <div style={{ display: "flex", gap: "10px" }}>
+                  <h3 className="text-xl font-bold text-gray-800">{event.title}</h3>
+                  <p className="text-gray-600">{event.description}</p>
+                  <p className="text-sm text-gray-500 mb-2">Date: {event.date}</p>
+                  <div className="flex space-x-2 mt-2">
                     <button
                       onClick={() => handleEditEvent(index)}
-                      style={{
-                        padding: "5px 10px",
-                        backgroundColor: "#ffc107",
-                        color: "#fff",
-                        border: "none",
-                        borderRadius: "8px",
-                        cursor: "pointer",
-                      }}
+                      className="px-3 py-1 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDeleteEvent(index)}
-                      style={{
-                        padding: "5px 10px",
-                        backgroundColor: "#dc3545",
-                        color: "#fff",
-                        border: "none",
-                        borderRadius: "8px",
-                        cursor: "pointer",
-                      }}
+                      className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600"
                     >
                       Delete
                     </button>
@@ -258,67 +193,33 @@ const Community = () => {
         </div>
 
         {/* Add New Event Form */}
-        <div
-          style={{
-            background: "#fff",
-            padding: "20px",
-            borderRadius: "8px",
-            boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
-            marginTop: "20px",
-          }}
-        >
-          <h3 style={{ fontSize: "20px", fontWeight: "bold", color: "#333" }}>Add a New Event</h3>
+        <div className="bg-white p-5 rounded-lg shadow-md mt-5">
+          <h3 className="text-xl font-bold text-gray-800 mb-3">Add a New Event</h3>
           <input
             type="text"
             name="title"
             placeholder="Event Title"
             value={newEvent.title}
             onChange={handleNewEventChange}
-            style={{
-              padding: "10px",
-              borderRadius: "8px",
-              border: "1px solid #ddd",
-              marginBottom: "10px",
-              width: "100%",
-            }}
+            className="w-full p-2 mb-3 rounded-lg border border-gray-300"
           />
           <textarea
             name="description"
             placeholder="Event Description"
             value={newEvent.description}
             onChange={handleNewEventChange}
-            style={{
-              padding: "10px",
-              borderRadius: "8px",
-              border: "1px solid #ddd",
-              marginBottom: "10px",
-              width: "100%",
-              minHeight: "100px",
-            }}
+            className="w-full p-2 mb-3 rounded-lg border border-gray-300 h-24"
           />
           <input
             type="date"
             name="date"
             value={newEvent.date}
             onChange={handleNewEventChange}
-            style={{
-              padding: "10px",
-              borderRadius: "8px",
-              border: "1px solid #ddd",
-              marginBottom: "10px",
-              width: "100%",
-            }}
+            className="w-full p-2 mb-3 rounded-lg border border-gray-300"
           />
           <button
             onClick={handleAddEvent}
-            style={{
-              padding: "10px 20px",
-              backgroundColor: "#007bff",
-              color: "#fff",
-              border: "none",
-              borderRadius: "8px",
-              cursor: "pointer",
-            }}
+            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
           >
             Add Event
           </button>
@@ -326,67 +227,35 @@ const Community = () => {
       </section>
 
       {/* Chat Section */}
-      <section
-        style={{
-          marginBottom: "30px",
-          backgroundColor: "#f9f9f9",
-          borderRadius: "10px",
-          padding: "20px",
-          boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <h2 style={{ fontSize: "24px", marginBottom: "10px", color: "#333" }}>Community Chat</h2>
+      <section className="mb-8 bg-gray-100 rounded-lg p-5 shadow-md">
+        <h2 className="text-2xl font-semibold mb-4 text-gray-800">Community Chat</h2>
         <div
           ref={chatContainerRef}
-          style={{
-            border: "1px solid #ddd",
-            borderRadius: "10px",
-            height: "300px",
-            overflowY: "auto",
-            padding: "10px",
-            backgroundColor: "#fff",
-            marginBottom: "10px",
-          }}
+          className="border border-gray-300 rounded-lg h-72 overflow-y-auto p-3 bg-white mb-4"
         >
           {messages.length === 0 ? (
-            <p style={{ color: "#888", textAlign: "center" }}>No messages yet. Start the conversation!</p>
+            <p className="text-gray-500 text-center">No messages yet. Start the conversation!</p>
           ) : (
             messages.map((message) => (
-              <div
-                key={message._id}
-                style={{
-                  padding: "10px",
-                  margin: "5px 0",
-                  borderRadius: "8px",
-                  backgroundColor: "#f1f1f1",
-                  wordWrap: "break-word",
-                }}
-              >
+              <div key={message._id} className="p-2 my-1 rounded-lg bg-gray-200 break-words">
                 {message.text}
-                <span style={{ fontSize: "10px", color: "#888", marginLeft: "10px" }}>{message.timestamp}</span>
+                <span className="text-xs text-gray-500 ml-2">{message.timestamp}</span>
               </div>
             ))
           )}
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        <div className="flex items-center gap-2">
           <input
             type="text"
             placeholder="Type your message..."
-            style={{ flex: 1, padding: "10px", borderRadius: "8px", border: "1px solid #ddd" }}
+            className="flex-1 p-2 rounded-lg border border-gray-300"
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
             onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
           />
           <button
-            style={{
-              padding: "10px 20px",
-              backgroundColor: "#007bff",
-              color: "#fff",
-              border: "none",
-              borderRadius: "8px",
-              cursor: "pointer",
-            }}
             onClick={handleSendMessage}
+            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
           >
             Send
           </button>
@@ -394,9 +263,9 @@ const Community = () => {
       </section>
 
       {/* Rewards Section */}
-      <section style={{ marginBottom: "30px" }}>
-        <h2 style={{ fontSize: "24px", marginBottom: "10px", color: "#333" }}>Rewards for Active Members</h2>
-        <p>
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4 text-gray-800">Rewards for Active Members</h2>
+        <p className="text-gray-600">
           Earn points for participation and redeem them for discounts. Collect badges for achievements like "Top Contributor" and
           "Helpful Reviewer."
         </p>
