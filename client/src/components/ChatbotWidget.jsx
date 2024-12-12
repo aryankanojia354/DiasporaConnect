@@ -7,8 +7,10 @@ const ChatbotWidget = () => {
   const [input, setInput] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("English");
 
+  // Toggle chat window visibility
   const toggleChat = () => setIsOpen(!isOpen);
 
+  // Send message to the backend
   const sendMessage = async () => {
     if (input.trim() === "") return;
 
@@ -17,11 +19,16 @@ const ChatbotWidget = () => {
     setInput("");
 
     try {
-      const response = await axios.post("http://localhost:4173/chat", { message: input });
+      // Send message to the backend with language and message
+      const response = await axios.post("http://localhost:4173/chat", {
+        message: input,
+        language: selectedLanguage, // Include selected language
+      });
+
       const botMessage = { sender: "bot", text: response.data.reply };
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
-      const errorMessage = { sender: "bot", text: "How can I help you?." };
+      const errorMessage = { sender: "bot", text: "Error connecting to the server." };
       setMessages((prev) => [...prev, errorMessage]);
     }
   };

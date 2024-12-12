@@ -1,57 +1,20 @@
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List
-import ollama
+from typing import Dict
 from ollama import Client
 
-host = 'https://select-indirectly-jennet.ngrok-free.app'
-
-# set OLLAMA_HOST=https://select-indirectly-jennet.ngrok-free.app
-# host = 'http://localhost:11434'
+# Ollama client setup
+client = Client(host='http://localhost:11434')  # Replace with your Ollama server URL if different
 
 model_en = 'llama3.2'
 model_hi = 'SL-Lexicons/llama3-hindi-8b-q5_km.gguf:latest'
 model_te = 'rohithbojja/llama3-telugu:latest'
 model_ta = 'conceptsintamil/tamil-llama-7b-instruct-v0.2:latest'
-model_fr = '7shi/llama-translate:8b-q4_K_M'
+model_fr = 'jpacifico/french-alpaca-3b'
 model_jp = '7shi/llama-translate:8b-q4_K_M'
 model_de = 'lukasmalkmus/llama3-sauerkraut'
-# model = 'llama3.3'
-
-
-# ollama.pull(model)
-# try:
-#   ollama.chat(model)
-# except ollama.ResponseError as e:
-#   print('Error:', e.error)
-#   if e.status_code == 404:
-#     ollama.pull(model)
-
-client = Client(
-  host=host#,
-#   headers={'x-some-header': 'some-value'}
-)
-
-def checkRelevance(msg,ai,model,model_lang):
-    content = f"""You are an AI who checks if the answer given by the Another AI is Hallucinating with respect to the question asked.
-    Check if the Answer is relevant to the question, if it is relevant return only Yes, if it is not relevant return only No.
-    Also in case the answer is repetetion of the question itself, then answer Yes if it is still relevant.
-    
-    Question : {msg}
-    Answer : {msg}
-    
-    Is the answer relevant to the question? (Yes/No) 
-    """#Also give the reason why or why not?
-    response = client.chat(model=model, messages=[
-    {
-        'role': 'user',
-        'content': content,
-    },
-    ])
-    relevant = f"ChatBot : {response.message.content}"
-    return relevant
 
 def translate_en_tamil(msg,model):
     msg = f"""Translate "{msg}" into tamil and give answer in tamil. GIVE TRANSLATED ANSWER ONLY."""
@@ -88,60 +51,27 @@ def answer_ai(msg,model,model_lang):
     },
     ])
     ai = f"{response.message.content}"
-    relevant = checkRelevance(question,ai,model,model_lang)
-    # if relevant=="Yes":
-    #     return relevant+"\n"+ai
-    # else:
-    #     return "Please choose the relevant category your query belongs to"
+    # relevant = checkRelevance(question,ai,model,model_lang)
     return ai
 
-def answer(msg):
-    global model_en, model_hi, model_te, model_ta
-    lang="en"
-    # model_lang = "en"
-    if lang=="en":
-        model = model_en
-        model_lang = "ENGLISH"
-    elif lang=="hi":
-        model = model_hi
-        model_lang = "HINDI"
-    elif lang=="fr":
-        model = model_fr
-        model_lang = "FRENCH"
-    elif lang=="de":
-        model = model_de
-        model_lang = "GERMAN"
-    elif lang=="jp":
-        model = model_jp
-        model_lang = "JAPANESE"
-    elif lang=="te":
-        model = model_te
-        model_lang = "TELUGU"
-        msg = answer_ai(msg,model_en,"ENGLISH")
-        return "ChatBot :" + translate_en_telugu(msg,model)
-    elif lang=="ta":
-        model = model_ta
-        model_lang = "TAMIL"
-        msg = answer_ai(msg,model_en,"ENGLISH")
-        return "ChatBot :" + translate_en_tamil(msg,model)
-    else:
-        return "Your Language is Currently not supported."
-        
-    return "ChatBot :" + answer_ai(msg,model,model_lang)
+# Models for different languages
+model_mapping = {
+    "English": "llama3.2",
+    "Hindi": "SL-Lexicons/llama3-hindi-8b-q5_km.gguf:latest",
+    "Tamil": "conceptsintamil/tamil-llama-7b-instruct-v0.2:latest",
+    "Telugu": "rohithbojja/llama3-telugu:latest",
+    "French": "jpacifico/french-alpaca-3b",
+    "German": "lukasmalkmus/llama3-sauerkraut",
+    "Japanese": "7shi/llama-translate:8b-q4_K_M",
+}
 
-# print(response)
-
-# class Chat(BaseModel):
-#     name: str
-
-# class Chats(BaseModel):
-#     chats: List[Chat]
-    
 app = FastAPI(debug=True)
 
+# CORS Middleware setup
 origins = [
-    "http://localhost:5173",
-    # Add more origins here
+    "http://localhost:5173", 
+    "http://localhost:5174", 
+    "http://localhost:4173",
 ]
 
 app.add_middleware(
@@ -152,19 +82,29 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-memory_db = list()
+# Pydantic model for incoming chat messages
+class ChatRequest(BaseModel):
+    message: str
+    language: str
 
-@app.get("/chats", response_model=str)
-def get_chats():
-    return memory_db[-1]#Chats(chats=memory_db["chats"])
+@app.post("/chat")
+async def chat(request: ChatRequest) -> Dict[str, str]:
+    # Debug logging to check the incoming data
+    print(f"Received message: {request.message}")
+    print(f"Selected language: {request.language}")
 
-@app.post("/chats")
-def add_chat(chat):
-    print(chat)
-    chat = str(answer(str(chat)))
-    memory_db+=(chat)
-    return chat
-    
+    message = request.message.strip()
+    language = request.language
+
+    # Default to English if the selected language is not supported
+    model = model_mapping.get(language, model_mapping["English"])
+
+    try:
+        response = client.chat(model=model, messages=[{"role": "user", "content": message}])
+        return {"reply": response.message.content}
+    except Exception as e:
+        print(f"Error processing the request: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=4173)
