@@ -3,6 +3,7 @@ from fastapi.responses import JSONResponse
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
+import uvicorn
 
 # Initialize FastAPI app
 app = FastAPI()
@@ -11,7 +12,7 @@ app = FastAPI()
 @app.get("/predictions")
 async def get_predictions():
     # Load dataset
-    data = pd.read_csv('datasets/Indian_Artisan_Data.csv', low_memory=False)
+    data = pd.read_csv('Indian_Artisan_Data.csv', low_memory=False)
 
     # Preprocessing
     data['Date'] = pd.to_datetime(data['Date'], errors='coerce')
@@ -50,4 +51,4 @@ async def get_predictions():
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=5173)
+    uvicorn.run(app, host="0.0.0.0", port=3173)

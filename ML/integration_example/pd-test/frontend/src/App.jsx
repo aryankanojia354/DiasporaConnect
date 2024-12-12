@@ -6,7 +6,7 @@ const App = () => {
 
   // Fetch predictions from FastAPI
   useEffect(() => {
-    fetch("http://127.0.0.1:5173/predictions")
+    fetch("http://127.0.0.1:3173/predictions")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch predictions");
