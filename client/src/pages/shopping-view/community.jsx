@@ -49,6 +49,16 @@ const Community = () => {
     }
   };
 
+  // Function to clear all messages
+  const handleClearChat = async () => {
+    try {
+      await axios.delete("http://localhost:5000/api/messages");
+      setMessages([]);
+    } catch (error) {
+      console.error("Error clearing chat:", error);
+    }
+  };
+
   const handleEditEvent = (index) => {
     const updatedEvents = [...events];
     updatedEvents[index].isEditing = true;
@@ -106,7 +116,6 @@ const Community = () => {
     const eventToDelete = events[index];
     try {
       await axios.delete(`http://localhost:5000/api/events/${eventToDelete._id}`);
-      // Remove the event from the state
       const updatedEvents = [...events];
       updatedEvents.splice(index, 1);
       setEvents(updatedEvents);
@@ -118,9 +127,9 @@ const Community = () => {
   return (
     <div className="max-w-screen-xl mx-auto p-5 font-sans">
       {/* Welcome Section */}
-      <section className="mb-8 bg-gray-100 p-5 rounded-lg shadow-md">
-        <h1 className="text-4xl font-bold text-gray-800">Welcome to Our Community!</h1>
-        <p className="text-lg text-gray-600 mt-2">
+      <section className="mb-8 p-6 rounded-lg shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+        <h1 className="text-4xl font-extrabold mb-2">Welcome to Our Community!</h1>
+        <p className="text-lg">
           Connect, share, and grow with fellow shoppers. Join discussions, get tips, and explore exciting topics related
           to your favorite products.
         </p>
@@ -128,10 +137,15 @@ const Community = () => {
 
       {/* Events and Announcements Section */}
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-800">Events and Announcements</h2>
-        <div>
+        <h2 className="text-3xl font-semibold mb-6 text-gray-800 border-b-2 border-gray-300 pb-2">
+          Events and Announcements
+        </h2>
+        <div className="grid gap-6">
           {events.map((event, index) => (
-            <div key={event._id} className="bg-white p-5 mb-4 rounded-lg shadow-md">
+            <div
+              key={event._id}
+              className="bg-white p-6 rounded-lg shadow-md transition-transform transform hover:scale-105"
+            >
               {event.isEditing ? (
                 <div>
                   <input
@@ -139,49 +153,51 @@ const Community = () => {
                     name="title"
                     value={event.title}
                     onChange={(e) => handleEventChange(e, index)}
-                    className="w-full p-2 mb-3 rounded-lg border border-gray-300"
+                    className="w-full p-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <textarea
                     name="description"
                     value={event.description}
                     onChange={(e) => handleEventChange(e, index)}
-                    className="w-full p-2 mb-3 rounded-lg border border-gray-300 h-24"
+                    className="w-full p-3 mb-4 rounded-lg border border-gray-300 h-28 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <input
                     type="date"
                     name="date"
                     value={event.date}
                     onChange={(e) => handleEventChange(e, index)}
-                    className="w-full p-2 mb-3 rounded-lg border border-gray-300"
+                    className="w-full p-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
-                  <button
-                    onClick={() => handleSaveEvent(index)}
-                    className="px-4 py-2 mr-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
-                  >
-                    Save
-                  </button>
-                  <button
-                    onClick={() => handleDeleteEvent(index)}
-                    className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-                  >
-                    Delete
-                  </button>
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={() => handleSaveEvent(index)}
+                      className="px-5 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={() => handleDeleteEvent(index)}
+                      className="px-5 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <div>
-                  <h3 className="text-xl font-bold text-gray-800">{event.title}</h3>
-                  <p className="text-gray-600">{event.description}</p>
-                  <p className="text-sm text-gray-500 mb-2">Date: {event.date}</p>
-                  <div className="flex space-x-2 mt-2">
+                  <h3 className="text-2xl font-bold text-gray-800 mb-2">{event.title}</h3>
+                  <p className="text-gray-700 mb-4">{event.description}</p>
+                  <p className="text-sm text-gray-500 mb-4">Date: {event.date}</p>
+                  <div className="flex space-x-2">
                     <button
                       onClick={() => handleEditEvent(index)}
-                      className="px-3 py-1 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
+                      className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDeleteEvent(index)}
-                      className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                      className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
                     >
                       Delete
                     </button>
@@ -193,33 +209,33 @@ const Community = () => {
         </div>
 
         {/* Add New Event Form */}
-        <div className="bg-white p-5 rounded-lg shadow-md mt-5">
-          <h3 className="text-xl font-bold text-gray-800 mb-3">Add a New Event</h3>
+        <div className="bg-white p-6 rounded-lg shadow-md mt-8">
+          <h3 className="text-2xl font-bold text-gray-800 mb-4">Add a New Event</h3>
           <input
             type="text"
             name="title"
             placeholder="Event Title"
             value={newEvent.title}
             onChange={handleNewEventChange}
-            className="w-full p-2 mb-3 rounded-lg border border-gray-300"
+            className="w-full p-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <textarea
             name="description"
             placeholder="Event Description"
             value={newEvent.description}
             onChange={handleNewEventChange}
-            className="w-full p-2 mb-3 rounded-lg border border-gray-300 h-24"
+            className="w-full p-3 mb-4 rounded-lg border border-gray-300 h-28 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="date"
             name="date"
             value={newEvent.date}
             onChange={handleNewEventChange}
-            className="w-full p-2 mb-3 rounded-lg border border-gray-300"
+            className="w-full p-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
             onClick={handleAddEvent}
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors w-full"
           >
             Add Event
           </button>
@@ -227,45 +243,51 @@ const Community = () => {
       </section>
 
       {/* Chat Section */}
-      <section className="mb-8 bg-gray-100 rounded-lg p-5 shadow-md">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-800">Community Chat</h2>
+      <section className="mb-8 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg p-6 shadow-lg text-white">
+        <h2 className="text-3xl font-semibold mb-4">Community Chat</h2>
         <div
           ref={chatContainerRef}
-          className="border border-gray-300 rounded-lg h-72 overflow-y-auto p-3 bg-white mb-4"
+          className="border border-gray-300 rounded-lg h-72 overflow-y-auto p-4 bg-white text-gray-800 mb-4"
         >
           {messages.length === 0 ? (
             <p className="text-gray-500 text-center">No messages yet. Start the conversation!</p>
           ) : (
             messages.map((message) => (
-              <div key={message._id} className="p-2 my-1 rounded-lg bg-gray-200 break-words">
-                {message.text}
-                <span className="text-xs text-gray-500 ml-2">{message.timestamp}</span>
+              <div key={message._id} className="p-3 my-2 rounded-lg bg-gray-100">
+                <p>{message.text}</p>
+                <span className="text-xs text-gray-500">{message.timestamp}</span>
               </div>
             ))
           )}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <input
             type="text"
             placeholder="Type your message..."
-            className="flex-1 p-2 rounded-lg border border-gray-300"
+            className="flex-1 p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800"
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
             onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
           />
           <button
             onClick={handleSendMessage}
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+            className="p-3 bg-green-600 text-white rounded-full hover:bg-green-700 transition-colors"
           >
             Send
+          </button>
+          <button
+            onClick={handleClearChat}
+            className="p-3 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors"
+          >
+            Clear Chats
           </button>
         </div>
       </section>
 
       {/* Rewards Section */}
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-800">Rewards for Active Members</h2>
-        <p className="text-gray-600">
+        <h2 className="text-3xl font-semibold mb-4 text-gray-800">Rewards for Active Members</h2>
+        <p className="text-gray-700">
           Earn points for participation and redeem them for discounts. Collect badges for achievements like "Top Contributor" and
           "Helpful Reviewer."
         </p>
