@@ -53,8 +53,7 @@ A platform connecting the Indian diaspora with authentic Rakhis and handicrafts 
 5. Community tab for chat - 3 modes, global, customers, sellers- can also redirect to another website for conversations- store in db
 6. Workshop static page with meet links and random photos
 7. Postage fare calculator from Indian post website
-8. Use dummy website and tracking number for Indian post delivery
-9. 
+
 
 ### Product List 
 1. Rakhi
