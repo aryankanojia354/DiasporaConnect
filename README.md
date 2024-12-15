@@ -8,37 +8,28 @@ A platform connecting the Indian diaspora with authentic Rakhis and handicrafts 
 
 ### TO DO (What to add, in which file, and where)
 
-1. - [ ] **Workshops Page**
-   - Add a webpage for **Workshops**.
-   - Add a corresponding **"Workshops"** tab on the home screen's navigation bar.
 
-2. - [ ] **Community Tab**
-   - Add a new **Community** section and its corresponding tab to the home screen's navigation bar.
-
-3. - [ ] **Forgot Password**
+1. - [ ] **Forgot Password**
    - Implement a **Forgot Password** functionality.
    - Add the necessary form and logic for email/password recovery.
 
-4. - [ ] **Google and Microsoft Login**
+2. - [ ] **Google and Microsoft Login**
    - Integrate Google and Microsoft sign-in functionalities.
    - Add buttons for these login options on the login page.
 
-5. - [ ] **Chatbot Widget**
+3. - [ ] **Chatbot Widget**
    - Embed a chatbot widget for user interaction on the site.
-   - Position the widget on all relevant pages.
+   - Position the widget on all relevant pages. 
 
-6. - [ ] **Home Page/Landing Page**
-   - Design and finalize the **Home Page/Landing Page** with proper layout and links to other sections.
-
-7. - [ ] **Language Change/Multilingual Support**
+4. - [ ] **Language Change/Multilingual Support**
    - Add options for multilingual support, including a language change dropdown or toggle.
    - Ensure translations for key UI elements.
 
-8. - [ ] **Indian Post Tracking Webpage**
+5. - [ ] **Indian Post Tracking Webpage**
    - Create a dummy webpage for **Indian Post Tracking**.
    - Add input fields for tracking number and result display.
 
-9. - [ ] **Postage Fare Calculator**
+6. - [ ] **Postage Fare Calculator**
    - Develop a **Postage Fare Calculator** tool.
    - Integrate it with the Indian Post Tracking dummy webpage for easy access.
 
