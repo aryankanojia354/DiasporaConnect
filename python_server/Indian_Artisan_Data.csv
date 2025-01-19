@@ -1,49 +1,49 @@
 Product Name,Category,Sub Category,Date,Price (INR),State,Quantity,Order ID,Payment Status
-Rakhi,Festive Essentials,Rakhi,2024-12-01,50,Uttar Pradesh,10,ORD001,Completed
-Diya,Festive Essentials,Diya,2024-11-20,20,Rajasthan,30,ORD002,Pending
-Hawan Samagri,Festive Essentials,Hawan Samagri,2024-11-18,150,Haryana,5,ORD003,Completed
-Sandal Dhoop,Festive Essentials,Sandal/Guggul Dhoop,2024-11-17,120,Madhya Pradesh,15,ORD004,Completed
-Desi Cow Ghee,Festive Essentials,Desi Cow Ghee,2024-11-15,500,Bihar,8,ORD005,Pending
-Cotton Wicks,Festive Essentials,Cotton Wicks,2024-11-14,30,West Bengal,25,ORD006,Completed
-Saree,Traditional Clothing,Sarees,2024-12-02,1200,Tamil Nadu,3,ORD007,Completed
-Kurta Pajama,Traditional Clothing,Kurta/Pajama,2024-11-30,900,Uttar Pradesh,6,ORD008,Completed
-Lehnga,Traditional Clothing,Lehnga,2024-11-28,2500,Gujarat,2,ORD009,Pending
-Mitti Ke Bartan,Handicrafts,Mitti ke Bartan,2024-11-26,350,Rajasthan,10,ORD010,Completed
-Lakh Bangles,Handicrafts,Lakh Bangles,2024-11-25,200,Rajasthan,12,ORD011,Completed
-Handmade Scenery,Handicrafts,Handmade Sceneries,2024-11-22,1800,Jammu & Kashmir,1,ORD012,Pending
-Pashmina Shawl,Handicrafts,Pashmina Shawls,2024-11-21,3500,Jammu & Kashmir,2,ORD013,Completed
-Hand Embroidery,Artistic Items,Hand Embroidery,2024-11-19,750,Punjab,5,ORD014,Completed
-Regional Dress,Traditional Goods,Indian Regional Dresses,2024-11-18,2200,Maharashtra,4,ORD015,Pending
-Regional Footwear,Traditional Goods,Indian Regional Footwear,2024-11-16,800,Rajasthan,7,ORD016,Completed
-Rakhi,Festive Essentials,Rakhi,2024-12-02,50,Uttar Pradesh,20,ORD017,Completed
-Diya,Festive Essentials,Diya,2024-11-30,25,Rajasthan,40,ORD018,Completed
-Hawan Samagri,Festive Essentials,Hawan Samagri,2024-11-29,180,Haryana,10,ORD019,Completed
-Sandal Dhoop,Festive Essentials,Sandal/Guggul Dhoop,2024-11-28,150,Madhya Pradesh,10,ORD020,Pending
-Desi Cow Ghee,Festive Essentials,Desi Cow Ghee,2024-11-27,600,Bihar,4,ORD021,Completed
-Cotton Wicks,Festive Essentials,Cotton Wicks,2024-11-25,35,West Bengal,50,ORD022,Pending
-Saree,Traditional Clothing,Sarees,2024-11-24,1300,Tamil Nadu,2,ORD023,Completed
-Kurta Pajama,Traditional Clothing,Kurta/Pajama,2024-11-23,850,Uttar Pradesh,3,ORD024,Completed
-Lehnga,Traditional Clothing,Lehnga,2024-11-22,2700,Gujarat,1,ORD025,Pending
-Mitti Ke Bartan,Handicrafts,Mitti ke Bartan,2024-11-20,400,Rajasthan,8,ORD026,Completed
-Lakh Bangles,Handicrafts,Lakh Bangles,2024-11-18,250,Rajasthan,15,ORD027,Completed
-Handmade Scenery,Handicrafts,Handmade Sceneries,2024-11-15,1900,Jammu & Kashmir,2,ORD028,Pending
-Pashmina Shawl,Handicrafts,Pashmina Shawls,2024-11-14,4000,Jammu & Kashmir,1,ORD029,Completed
-Hand Embroidery,Artistic Items,Hand Embroidery,2024-11-12,800,Punjab,4,ORD030,Completed
-Regional Dress,Traditional Goods,Indian Regional Dresses,2024-11-10,2500,Maharashtra,6,ORD031,Pending
-Regional Footwear,Traditional Goods,Indian Regional Footwear,2024-11-08,900,Rajasthan,10,ORD032,Completed
-Rakhi,Festive Essentials,Rakhi,2024-12-01,55,Uttar Pradesh,25,ORD033,Completed
-Diya,Festive Essentials,Diya,2024-11-29,30,Rajasthan,60,ORD034,Completed
-Hawan Samagri,Festive Essentials,Hawan Samagri,2024-11-28,200,Haryana,7,ORD035,Completed
-Sandal Dhoop,Festive Essentials,Sandal/Guggul Dhoop,2024-11-27,160,Madhya Pradesh,6,ORD036,Pending
-Desi Cow Ghee,Festive Essentials,Desi Cow Ghee,2024-11-26,550,Bihar,3,ORD037,Completed
-Cotton Wicks,Festive Essentials,Cotton Wicks,2024-11-24,40,West Bengal,30,ORD038,Pending
-Saree,Traditional Clothing,Sarees,2024-11-23,1400,Tamil Nadu,1,ORD039,Completed
-Kurta Pajama,Traditional Clothing,Kurta/Pajama,2024-11-22,950,Uttar Pradesh,8,ORD040,Completed
-Lehnga,Traditional Clothing,Lehnga,2024-11-21,2800,Gujarat,2,ORD041,Pending
-Mitti Ke Bartan,Handicrafts,Mitti ke Bartan,2024-11-19,500,Rajasthan,12,ORD042,Completed
-Lakh Bangles,Handicrafts,Lakh Bangles,2024-11-17,300,Rajasthan,20,ORD043,Completed
-Handmade Scenery,Handicrafts,Handmade Sceneries,2024-11-15,2000,Jammu & Kashmir,1,ORD044,Pending
-Pashmina Shawl,Handicrafts,Pashmina Shawls,2024-11-14,4500,Jammu & Kashmir,3,ORD045,Completed
-Hand Embroidery,Artistic Items,Hand Embroidery,2024-11-13,900,Punjab,7,ORD046,Completed
-Regional Dress,Traditional Goods,Indian Regional Dresses,2024-11-11,2800,Maharashtra,2,ORD047,Pending
-Regional Footwear,Traditional Goods,Indian Regional Footwear,2024-11-09,950,Rajasthan,9,ORD048,Completed
+Rakhi,Festive Essentials,Rakhi,01-12-2024,50,Uttar Pradesh,10,ORD001,Completed
+Diya,Festive Essentials,Diya,20-11-2024,20,Rajasthan,30,ORD002,Pending
+Hawan Samagri,Festive Essentials,Hawan Samagri,18-11-2024,150,Haryana,5,ORD003,Completed
+Sandal Dhoop,Festive Essentials,Sandal/Guggul Dhoop,17-11-2024,120,Madhya Pradesh,15,ORD004,Completed
+Desi Cow Ghee,Festive Essentials,Desi Cow Ghee,15-11-2024,500,Bihar,8,ORD005,Pending
+Cotton Wicks,Festive Essentials,Cotton Wicks,14-11-2024,30,West Bengal,25,ORD006,Completed
+Saree,Traditional Clothing,Sarees,02-12-2024,1200,Tamil Nadu,3,ORD007,Completed
+Kurta Pajama,Traditional Clothing,Kurta/Pajama,30-11-2024,900,Uttar Pradesh,6,ORD008,Completed
+Lehnga,Traditional Clothing,Lehnga,28-11-2024,2500,Gujarat,2,ORD009,Pending
+Mitti Ke Bartan,Handicrafts,Mitti ke Bartan,26-11-2024,350,Rajasthan,10,ORD010,Completed
+Lakh Bangles,Handicrafts,Lakh Bangles,25-11-2024,200,Rajasthan,12,ORD011,Completed
+Handmade Scenery,Handicrafts,Handmade Sceneries,22-11-2024,1800,Jammu & Kashmir,1,ORD012,Pending
+Pashmina Shawl,Handicrafts,Pashmina Shawls,21-11-2024,3500,Jammu & Kashmir,2,ORD013,Completed
+Hand Embroidery,Artistic Items,Hand Embroidery,19-11-2024,750,Punjab,5,ORD014,Completed
+Regional Dress,Traditional Goods,Indian Regional Dresses,18-11-2024,2200,Maharashtra,4,ORD015,Pending
+Regional Footwear,Traditional Goods,Indian Regional Footwear,16-11-2024,800,Rajasthan,7,ORD016,Completed
+Rakhi,Festive Essentials,Rakhi,02-12-2024,50,Uttar Pradesh,20,ORD017,Completed
+Diya,Festive Essentials,Diya,30-11-2024,25,Rajasthan,40,ORD018,Completed
+Hawan Samagri,Festive Essentials,Hawan Samagri,29-11-2024,180,Haryana,10,ORD019,Completed
+Sandal Dhoop,Festive Essentials,Sandal/Guggul Dhoop,28-11-2024,150,Madhya Pradesh,10,ORD020,Pending
+Desi Cow Ghee,Festive Essentials,Desi Cow Ghee,27-11-2024,600,Bihar,4,ORD021,Completed
+Cotton Wicks,Festive Essentials,Cotton Wicks,25-11-2024,35,West Bengal,50,ORD022,Pending
+Saree,Traditional Clothing,Sarees,24-11-2024,1300,Tamil Nadu,2,ORD023,Completed
+Kurta Pajama,Traditional Clothing,Kurta/Pajama,23-11-2024,850,Uttar Pradesh,3,ORD024,Completed
+Lehnga,Traditional Clothing,Lehnga,22-11-2024,2700,Gujarat,1,ORD025,Pending
+Mitti Ke Bartan,Handicrafts,Mitti ke Bartan,20-11-2024,400,Rajasthan,8,ORD026,Completed
+Lakh Bangles,Handicrafts,Lakh Bangles,18-11-2024,250,Rajasthan,15,ORD027,Completed
+Handmade Scenery,Handicrafts,Handmade Sceneries,15-11-2024,1900,Jammu & Kashmir,2,ORD028,Pending
+Pashmina Shawl,Handicrafts,Pashmina Shawls,14-11-2024,4000,Jammu & Kashmir,1,ORD029,Completed
+Hand Embroidery,Artistic Items,Hand Embroidery,12-11-2024,800,Punjab,4,ORD030,Completed
+Regional Dress,Traditional Goods,Indian Regional Dresses,10-11-2024,2500,Maharashtra,6,ORD031,Pending
+Regional Footwear,Traditional Goods,Indian Regional Footwear,08-11-2024,900,Rajasthan,10,ORD032,Completed
+Rakhi,Festive Essentials,Rakhi,01-12-2024,55,Uttar Pradesh,25,ORD033,Completed
+Diya,Festive Essentials,Diya,29-11-2024,30,Rajasthan,60,ORD034,Completed
+Hawan Samagri,Festive Essentials,Hawan Samagri,28-11-2024,200,Haryana,7,ORD035,Completed
+Sandal Dhoop,Festive Essentials,Sandal/Guggul Dhoop,27-11-2024,160,Madhya Pradesh,6,ORD036,Pending
+Desi Cow Ghee,Festive Essentials,Desi Cow Ghee,26-11-2024,550,Bihar,3,ORD037,Completed
+Cotton Wicks,Festive Essentials,Cotton Wicks,24-11-2024,40,West Bengal,30,ORD038,Pending
+Saree,Traditional Clothing,Sarees,23-11-2024,1400,Tamil Nadu,1,ORD039,Completed
+Kurta Pajama,Traditional Clothing,Kurta/Pajama,22-11-2024,950,Uttar Pradesh,8,ORD040,Completed
+Lehnga,Traditional Clothing,Lehnga,21-11-2024,2800,Gujarat,2,ORD041,Pending
+Mitti Ke Bartan,Handicrafts,Mitti ke Bartan,19-11-2024,500,Rajasthan,12,ORD042,Completed
+Lakh Bangles,Handicrafts,Lakh Bangles,17-11-2024,300,Rajasthan,20,ORD043,Completed
+Handmade Scenery,Handicrafts,Handmade Sceneries,15-11-2024,2000,Jammu & Kashmir,1,ORD044,Pending
+Pashmina Shawl,Handicrafts,Pashmina Shawls,14-11-2024,4500,Jammu & Kashmir,3,ORD045,Completed
+Hand Embroidery,Artistic Items,Hand Embroidery,13-11-2024,900,Punjab,7,ORD046,Completed
+Regional Dress,Traditional Goods,Indian Regional Dresses,11-11-2024,2800,Maharashtra,2,ORD047,Pending
+Regional Footwear,Traditional Goods,Indian Regional Footwear,09-11-2024,950,Rajasthan,9,ORD048,Completed
