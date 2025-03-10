@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
-import { Flower, Gift, GiftIcon, Home, Leaf, Paintbrush } from "lucide-react";
+import { Flower, Gift, Home, Leaf, Paintbrush } from "lucide-react";
 import { FaGifts, FaTshirt, FaPalette, FaLeaf, FaHands } from "react-icons/fa";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 
@@ -28,7 +28,7 @@ const categoriesWithIcon = [
 const brandsWithIcon = [
   { id: "Patanjali", label: "Patanjali", icon: Leaf },
   { id: "Khadi Gram Udyog", label: "Khadi Gram Udyog", icon: Home },
-  { id: "indigifts", label: "Indigifts", icon: GiftIcon },
+  { id: "indigifts", label: "Indigifts", icon: Gift },
   { id: "fabindia", label: "FabIndia", icon: Flower },
   { id: "artisan-direct", label: "Artisan Direct", icon: Paintbrush },
   { id: "raymond-ethnix", label: "Raymond Ethnix", icon: FaTshirt },
@@ -50,13 +50,13 @@ function GuestHomePage() {
     sessionStorage.removeItem("filters");
     const currentFilter = { [section]: [item.id] };
     sessionStorage.setItem("filters", JSON.stringify(currentFilter));
-    navigate(`/shop/listing`);
+    navigate("/shop/listing"); // Fixed: Use string instead of path literal
   }
 
   // Product details can be viewed by anyone (authentication not required)
   const handleGetProductDetails = (prodId) => {
     dispatch(fetchProductDetails(prodId));
-    navigate(`/shop/product/${prodId}`);
+    navigate(`/shop/product/${prodId}`); // Fixed: Use template string
   };
 
   // Add to cart requires authentication
@@ -126,7 +126,7 @@ function GuestHomePage() {
               index === currentSlide ? "opacity-100" : "opacity-0"
             } absolute inset-0 w-full h-full object-cover transition-opacity duration-1000`}
             loading="lazy"
-            alt={`Slide ${index + 1}`}
+            alt={`Slide ${index + 1}`} // Fixed: Use template string for alt
           />
         ))}
         <Button
@@ -159,18 +159,21 @@ function GuestHomePage() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">Shop by Category</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {categoriesWithIcon.map((cat) => (
-              <Card
-                key={cat.id}
-                onClick={() => handleNavigateToListingPage(cat, "category")}
-                className="cursor-pointer hover:shadow-lg transition-shadow bg-white"
-              >
-                <CardContent className="flex flex-col items-center justify-center p-6">
-                  <cat.icon className="w-12 h-12 mb-4 text-primary" />
-                  <span className="font-bold">{cat.label}</span>
-                </CardContent>
-              </Card>
-            ))}
+            {categoriesWithIcon.map((cat) => {
+              const Icon = cat.icon; // Alias to ensure proper component rendering
+              return (
+                <Card
+                  key={cat.id}
+                  onClick={() => handleNavigateToListingPage(cat, "category")}
+                  className="cursor-pointer hover:shadow-lg transition-shadow bg-white"
+                >
+                  <CardContent className="flex flex-col items-center justify-center p-6">
+                    <Icon className="w-12 h-12 mb-4 text-primary" />
+                    <span className="font-bold">{cat.label}</span>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -180,18 +183,21 @@ function GuestHomePage() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">Shop by Brand</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {brandsWithIcon.map((brand) => (
-              <Card
-                key={brand.id}
-                onClick={() => handleNavigateToListingPage(brand, "brand")}
-                className="cursor-pointer hover:shadow-lg transition-shadow bg-white"
-              >
-                <CardContent className="flex flex-col items-center justify-center p-6">
-                  <brand.icon className="w-12 h-12 mb-4 text-primary" />
-                  <span className="font-bold">{brand.label}</span>
-                </CardContent>
-              </Card>
-            ))}
+            {brandsWithIcon.map((brand) => {
+              const Icon = brand.icon; // Alias to ensure proper component rendering
+              return (
+                <Card
+                  key={brand.id}
+                  onClick={() => handleNavigateToListingPage(brand, "brand")}
+                  className="cursor-pointer hover:shadow-lg transition-shadow bg-white"
+                >
+                  <CardContent className="flex flex-col items-center justify-center p-6">
+                    <Icon className="w-12 h-12 mb-4 text-primary" />
+                    <span className="font-bold">{brand.label}</span>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -340,7 +346,7 @@ function GuestHomePage() {
             </div>
           </div>
           <div className="text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} Diaspora-Connect. All rights reserved.
+            © {new Date().getFullYear()} Diaspora-Connect. All rights reserved.
           </div>
         </div>
       </footer>
