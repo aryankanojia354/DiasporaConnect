@@ -10,7 +10,11 @@ function ShoppingProductTile({
 }) {
   return (
     <Card className="w-full max-w-sm mx-auto">
-      <div onClick={() => handleGetProductDetails(product?._id)}>
+      {/* Clickable container for product details */}
+      <div
+        onClick={() => handleGetProductDetails(product?._id)}
+        className="cursor-pointer"
+      >
         <div className="relative">
           <img
             src={product?.image}
@@ -64,7 +68,10 @@ function ShoppingProductTile({
           </Button>
         ) : (
           <Button
-            onClick={() => handleAddtoCart(product?._id, product?.totalStock)}
+            onClick={(e) => {
+              e.stopPropagation(); // Prevents the parent onClick from firing
+              handleAddtoCart(product?._id, product?.totalStock);
+            }}
             className="w-full"
           >
             Add to cart

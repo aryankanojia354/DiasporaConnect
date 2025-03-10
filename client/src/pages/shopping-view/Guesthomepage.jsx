@@ -5,10 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
 import { Flower, Gift, GiftIcon, Home, Leaf, Paintbrush } from "lucide-react";
 import { FaGifts, FaTshirt, FaPalette, FaLeaf, FaHands } from "react-icons/fa";
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 
 import {
   fetchAllFilteredProducts,
@@ -16,7 +13,7 @@ import {
 } from "@/store/shop/products-slice";
 import { addToCart } from "@/store/shop/cart-slice";
 import { getFeatureImages } from "@/store/common-slice";
-import ShoppingProductTile from "@/components/shopping-view/product-tile";
+import ShoppingProductTile from "@/components/shopping-view/ShoppingProductTile";
 import ChatbotWidget from "@/components/ChatbotWidget";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -41,12 +38,11 @@ function GuestHomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { productList } = useSelector((state) => state.shopProducts);
   const { featureImageList } = useSelector((state) => state.commonFeature);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // Navigate to the listing page with proper filters
+  // Navigate to listing page with filters
   function handleNavigateToListingPage(getCurrentItem, section) {
     sessionStorage.removeItem("filters");
     const currentFilter = { [section]: [getCurrentItem.id] };
@@ -56,6 +52,8 @@ function GuestHomePage() {
 
   const handleGetProductDetails = (productId) => {
     dispatch(fetchProductDetails(productId));
+    // Navigate to product details page (or open a modal)
+    navigate(`/shop/product/${productId}`);
   };
 
   const handleAddToCart = (productId) => {
@@ -66,14 +64,13 @@ function GuestHomePage() {
     });
   };
 
-  // Auto-slide effect for the carousel
+  // Auto-slide effect for carousel
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prevSlide) =>
         (prevSlide + 1) % (featureImageList?.length || 1)
       );
     }, 15000);
-
     return () => clearInterval(timer);
   }, [featureImageList]);
 
@@ -107,8 +104,8 @@ function GuestHomePage() {
         </div>
       </div>
 
-      {/* Image Carousel with Aspect Ratio Container */}
-      <div className="relative w-full aspect-video sm:aspect-[4/3] md:aspect-[16/9] overflow-hidden bg-white">
+      {/* Image Carousel with Fixed Height */}
+      <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden bg-white">
         {featureImageList?.map((slide, index) => (
           <img
             src={slide?.image}
@@ -195,8 +192,8 @@ function GuestHomePage() {
             {productList?.map((productItem) => (
               <ShoppingProductTile
                 key={productItem.id}
-                handleGetProductDetails={handleGetProductDetails}
                 product={productItem}
+                handleGetProductDetails={handleGetProductDetails}
                 handleAddToCart={handleAddToCart}
               />
             ))}
