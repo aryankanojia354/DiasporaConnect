@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const Community = () => {
   // States
@@ -17,9 +18,9 @@ const Community = () => {
       setIsLoading(true);
       try {
         const [authRes, messagesRes, eventsRes] = await Promise.all([
-          axios.get("http://localhost:5000/api/auth/check-auth", { withCredentials: true }),
-          axios.get("http://localhost:5000/api/messages"),
-          axios.get("http://localhost:5000/api/events")
+          axios.get(`${backendUrl}/api/auth/check-auth`, { withCredentials: true }),
+          axios.get(`${backendUrl}/api/messages`),
+          axios.get(`${backendUrl}/api/events`)
         ]);
 
         // Handle username
