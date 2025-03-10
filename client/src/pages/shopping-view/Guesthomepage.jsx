@@ -42,31 +42,24 @@ function GuestHomePage() {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // Simple check for authentication. Adjust if you're storing auth info differently.
+  // Simple check for authentication
   const isLoggedIn = !!localStorage.getItem("token");
 
   // Navigate to listing page with filters
-  function handleNavigateToListingPage(getCurrentItem, section) {
+  function handleNavigateToListingPage(item, section) {
     sessionStorage.removeItem("filters");
-    const currentFilter = { [section]: [getCurrentItem.id] };
+    const currentFilter = { [section]: [item.id] };
     sessionStorage.setItem("filters", JSON.stringify(currentFilter));
     navigate(`/shop/listing`);
   }
 
+  // Product details can be viewed by anyone (authentication not required)
   const handleGetProductDetails = (productId) => {
-    if (!isLoggedIn) {
-      toast({
-        title: "Please Login",
-        description: "Please login or register to view product details.",
-      });
-      navigate("/auth/login");
-      return;
-    }
     dispatch(fetchProductDetails(productId));
-    // Navigate to product details page (or open a modal)
     navigate(`/shop/product/${productId}`);
   };
 
+  // Add to cart requires authentication
   const handleAddToCart = (productId) => {
     if (!isLoggedIn) {
       toast({
@@ -166,17 +159,15 @@ function GuestHomePage() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">Shop by Category</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {categoriesWithIcon.map((categoryItem) => (
+            {categoriesWithIcon.map((cat) => (
               <Card
-                key={categoryItem.id}
-                onClick={() =>
-                  handleNavigateToListingPage(categoryItem, "category")
-                }
+                key={cat.id}
+                onClick={() => handleNavigateToListingPage(cat, "category")}
                 className="cursor-pointer hover:shadow-lg transition-shadow bg-white"
               >
                 <CardContent className="flex flex-col items-center justify-center p-6">
-                  <categoryItem.icon className="w-12 h-12 mb-4 text-primary" />
-                  <span className="font-bold">{categoryItem.label}</span>
+                  <cat.icon className="w-12 h-12 mb-4 text-primary" />
+                  <span className="font-bold">{cat.label}</span>
                 </CardContent>
               </Card>
             ))}
@@ -189,17 +180,15 @@ function GuestHomePage() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">Shop by Brand</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {brandsWithIcon.map((brandItem) => (
+            {brandsWithIcon.map((brand) => (
               <Card
-                key={brandItem.id}
-                onClick={() =>
-                  handleNavigateToListingPage(brandItem, "brand")
-                }
+                key={brand.id}
+                onClick={() => handleNavigateToListingPage(brand, "brand")}
                 className="cursor-pointer hover:shadow-lg transition-shadow bg-white"
               >
                 <CardContent className="flex flex-col items-center justify-center p-6">
-                  <brandItem.icon className="w-12 h-12 mb-4 text-primary" />
-                  <span className="font-bold">{brandItem.label}</span>
+                  <brand.icon className="w-12 h-12 mb-4 text-primary" />
+                  <span className="font-bold">{brand.label}</span>
                 </CardContent>
               </Card>
             ))}
@@ -214,10 +203,10 @@ function GuestHomePage() {
             Featured Products
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
-            {productList?.map((productItem) => (
+            {productList?.map((prod) => (
               <ShoppingProductTile
-                key={productItem.id}
-                product={productItem}
+                key={prod.id}
+                product={prod}
                 handleGetProductDetails={handleGetProductDetails}
                 handleAddToCart={handleAddToCart}
               />
