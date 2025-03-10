@@ -1,4 +1,4 @@
-import paypal from "../../helpers/paypal.js"; // Ensure the file extension is included
+const paypal = require("paypal-rest-sdk");
 
 paypal.configure({
   mode: "sandbox",
