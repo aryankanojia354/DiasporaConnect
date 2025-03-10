@@ -5,21 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
 import { Flower, Gift, GiftIcon, Home, Leaf, Paintbrush } from "lucide-react";
 import { FaGifts, FaTshirt, FaPalette, FaLeaf, FaHands } from "react-icons/fa";
-
 import {
-  Airplay,
-  BabyIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
-  CloudLightning,
-  Heater,
-  Images,
-  Shirt,
-  ShirtIcon,
-  ShoppingBasket,
-  UmbrellaIcon,
-  WashingMachine,
-  WatchIcon,
 } from "lucide-react";
 
 import {
@@ -29,7 +17,6 @@ import {
 import { addToCart } from "@/store/shop/cart-slice";
 import { getFeatureImages } from "@/store/common-slice";
 import ShoppingProductTile from "@/components/shopping-view/product-tile";
-import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import ChatbotWidget from "@/components/ChatbotWidget";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -47,7 +34,7 @@ const brandsWithIcon = [
   { id: "indigifts", label: "Indigifts", icon: GiftIcon },
   { id: "fabindia", label: "FabIndia", icon: Flower },
   { id: "artisan-direct", label: "Artisan Direct", icon: Paintbrush },
-  { id: "raymond-ethnix", label: "Raymond Ethnix", icon: Shirt },
+  { id: "raymond-ethnix", label: "Raymond Ethnix", icon: FaTshirt },
 ];
 
 function GuestHomePage() {
@@ -59,6 +46,7 @@ function GuestHomePage() {
   const navigate = useNavigate();
   const { toast } = useToast();
 
+  // Navigate to the listing page with proper filters
   function handleNavigateToListingPage(getCurrentItem, section) {
     sessionStorage.removeItem("filters");
     const currentFilter = { [section]: [getCurrentItem.id] };
@@ -78,14 +66,18 @@ function GuestHomePage() {
     });
   };
 
+  // Auto-slide effect for the carousel
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % featureImageList.length);
+      setCurrentSlide((prevSlide) =>
+        (prevSlide + 1) % (featureImageList?.length || 1)
+      );
     }, 15000);
 
     return () => clearInterval(timer);
   }, [featureImageList]);
 
+  // Fetch products when component mounts
   useEffect(() => {
     dispatch(
       fetchAllFilteredProducts({
@@ -95,6 +87,7 @@ function GuestHomePage() {
     );
   }, [dispatch]);
 
+  // Fetch feature images when component mounts
   useEffect(() => {
     dispatch(getFeatureImages());
   }, [dispatch]);
@@ -114,16 +107,17 @@ function GuestHomePage() {
         </div>
       </div>
 
-      {/* Image Carousel */}
-      <div className="relative w-full h-[600px] overflow-hidden bg-white">
+      {/* Image Carousel with Aspect Ratio Container */}
+      <div className="relative w-full aspect-video sm:aspect-[4/3] md:aspect-[16/9] overflow-hidden bg-white">
         {featureImageList?.map((slide, index) => (
           <img
             src={slide?.image}
             key={slide?.id || index}
             className={`${
               index === currentSlide ? "opacity-100" : "opacity-0"
-            } absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000`}
+            } absolute inset-0 w-full h-full object-cover transition-opacity duration-1000`}
             loading="lazy"
+            alt={`Slide ${index + 1}`}
           />
         ))}
         <Button
@@ -224,7 +218,7 @@ function GuestHomePage() {
       {/* Chatbot Widget */}
       <ChatbotWidget />
 
-      {/* Footer - With More Colors and Removed "About Us" */}
+      {/* Footer */}
       <footer className="bg-gradient-to-t from-indigo-100 via-white to-white border-t border-gray-200 mt-8">
         <div className="container mx-auto px-4 py-10 text-center text-gray-700">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 text-sm mb-10">
@@ -232,22 +226,34 @@ function GuestHomePage() {
               <h4 className="font-semibold mb-3 text-indigo-900">Quick Links</h4>
               <ul className="space-y-1">
                 <li>
-                  <a href="/shop/listing" className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900">
+                  <a
+                    href="/shop/listing"
+                    className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900"
+                  >
                     Shop All Products
                   </a>
                 </li>
                 <li>
-                  <a href="/auth/login" className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900">
+                  <a
+                    href="/auth/login"
+                    className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900"
+                  >
                     Login
                   </a>
                 </li>
                 <li>
-                  <a href="/auth/register" className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900">
+                  <a
+                    href="/auth/register"
+                    className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900"
+                  >
                     Signup
                   </a>
                 </li>
                 <li>
-                  <a href="/contact" className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900">
+                  <a
+                    href="/contact"
+                    className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900"
+                  >
                     Contact Us
                   </a>
                 </li>
@@ -257,17 +263,26 @@ function GuestHomePage() {
               <h4 className="font-semibold mb-3 text-indigo-900">Customer Service</h4>
               <ul className="space-y-1">
                 <li>
-                  <a href="/faq" className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900">
+                  <a
+                    href="/faq"
+                    className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900"
+                  >
                     FAQ
                   </a>
                 </li>
                 <li>
-                  <a href="/returns" className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900">
+                  <a
+                    href="/returns"
+                    className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900"
+                  >
                     Returns
                   </a>
                 </li>
                 <li>
-                  <a href="/shipping" className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900">
+                  <a
+                    href="/shipping"
+                    className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900"
+                  >
                     Shipping
                   </a>
                 </li>
@@ -277,17 +292,26 @@ function GuestHomePage() {
               <h4 className="font-semibold mb-3 text-indigo-900">Categories</h4>
               <ul className="space-y-1">
                 <li>
-                  <a href="#" className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900">
+                  <a
+                    href="#"
+                    className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900"
+                  >
                     Festive Essentials
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900">
+                  <a
+                    href="#"
+                    className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900"
+                  >
                     Traditional Clothing
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900">
+                  <a
+                    href="#"
+                    className="hover:underline text-indigo-700 transition-colors hover:text-indigo-900"
+                  >
                     Artistic Items
                   </a>
                 </li>
@@ -302,7 +326,6 @@ function GuestHomePage() {
               <p className="text-sm text-gray-700">Phone: +1 (234) 567-890</p>
             </div>
           </div>
-
           <div className="text-sm text-gray-500">
             &copy; {new Date().getFullYear()} Diaspora-Connect. All rights reserved.
           </div>
