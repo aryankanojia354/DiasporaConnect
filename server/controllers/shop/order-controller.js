@@ -1,8 +1,12 @@
-const paypal = require("../../helpers/paypal");
-const Order = require("../../models/Order");
-const Cart = require("../../models/Cart");
-const Product = require("../../models/Product");
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
+import paypal from "../../helpers/paypal.js";
+import Order from "../../models/Order.js";
+import Cart from "../../models/Cart.js";
+import Product from "../../models/Product.js";
+import dotenv from "dotenv";
+
+dotenv.config(); // Load environment variables
+
+const backendUrl = process.env.VITE_BACKEND_URL; // ✅ Correct way to access environment variables
 
 const createOrder = async (req, res) => {
   try {
@@ -20,6 +24,13 @@ const createOrder = async (req, res) => {
       payerId,
       cartId,
     } = req.body;
+
+    if (!backendUrl) {
+      return res.status(500).json({
+        success: false,
+        message: "Backend URL is not configured!",
+      });
+    }
 
     const create_payment_json = {
       intent: "sale",
@@ -53,10 +64,9 @@ const createOrder = async (req, res) => {
     paypal.payment.create(create_payment_json, async (error, paymentInfo) => {
       if (error) {
         console.log(error);
-
         return res.status(500).json({
           success: false,
-          message: "Error while creating paypal payment",
+          message: "Error while creating PayPal payment",
         });
       } else {
         const newlyCreatedOrder = new Order({
@@ -91,7 +101,7 @@ const createOrder = async (req, res) => {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Some error occured!",
+      message: "Some error occurred!",
     });
   }
 };
@@ -105,7 +115,7 @@ const capturePayment = async (req, res) => {
     if (!order) {
       return res.status(404).json({
         success: false,
-        message: "Order can not be found",
+        message: "Order cannot be found",
       });
     }
 
@@ -120,12 +130,11 @@ const capturePayment = async (req, res) => {
       if (!product) {
         return res.status(404).json({
           success: false,
-          message: `Not enough stock for this product ${product.title}`,
+          message: `Not enough stock for this product ${item.title}`,
         });
       }
 
       product.totalStock -= item.quantity;
-
       await product.save();
     }
 
@@ -143,7 +152,7 @@ const capturePayment = async (req, res) => {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Some error occured!",
+      message: "Some error occurred!",
     });
   }
 };
@@ -169,7 +178,7 @@ const getAllOrdersByUser = async (req, res) => {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Some error occured!",
+      message: "Some error occurred!",
     });
   }
 };
@@ -195,12 +204,12 @@ const getOrderDetails = async (req, res) => {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Some error occured!",
+      message: "Some error occurred!",
     });
   }
 };
 
-module.exports = {
+export {
   createOrder,
   capturePayment,
   getAllOrdersByUser,
