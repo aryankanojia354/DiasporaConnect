@@ -63,7 +63,7 @@ const Community = () => {
         text: inputMessage,
         timestamp: new Date().toLocaleTimeString()
       };
-      const res = await axios.post("http://localhost:5000/api/messages", newMessage);
+      const res = await axios.post(`${backendUrl}/api/messages`, newMessage);
       setMessages(prev => [...prev, res.data]);
       setInputMessage("");
     } catch (error) {
@@ -82,7 +82,7 @@ const Community = () => {
   const handleDeleteMessage = async (id) => {
     console.log('Deleting message with ID:', id); // Debugging line
     try {
-      const res = await axios.delete(`http://localhost:5000/api/messages/${id}`);
+      const res = await axios.delete(`${backendUrl}/api/messages/${id}`);
       if (res.data.success) {
         setMessages(prev => prev.filter(message => message._id !== id));
       } else {
@@ -115,7 +115,7 @@ const Community = () => {
     setEvents(updatedEvents);
 
     try {
-      await axios.put(`http://localhost:5000/api/events/${eventToUpdate._id}`, {
+      await axios.put(`${backendUrl}/api/events/${eventToUpdate._id}`, {
         title: eventToUpdate.title,
         description: eventToUpdate.description,
         date: eventToUpdate.date
@@ -138,7 +138,7 @@ const Community = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/api/events", newEvent);
+      const res = await axios.post(`${backendUrl}/api/events`, newEvent);
       setEvents(prev => [...prev, { ...res.data, isEditing: false }]);
       setNewEvent({ title: "", description: "", date: "" });
     } catch (error) {
@@ -150,7 +150,7 @@ const Community = () => {
   const handleDeleteEvent = async (index) => {
     const eventToDelete = events[index];
     try {
-      await axios.delete(`http://localhost:5000/api/events/${eventToDelete._id}`);
+      await axios.delete(`${backendUrl}/api/events/${eventToDelete._id}`);
       setEvents(prev => prev.filter((_, i) => i !== index));
     } catch (error) {
       console.error("Error:", error);
