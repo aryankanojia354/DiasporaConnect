@@ -103,7 +103,7 @@ function GuestHomePage() {
     <div className="flex flex-col min-h-screen bg-white">
       {/* Header */}
       <div className="flex justify-between items-center p-4 bg-gray-100">
-        <div className="text-2xl font-bold">Welcome to Our Store</div>
+        <div className="text-2xl font-bold">DiasporaConnect</div>
         <div className="space-x-4">
           <Button onClick={() => navigate("/auth/login")} variant="outline">
             Login
