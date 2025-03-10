@@ -5,12 +5,13 @@ const initialState = {
   cartItems: [],
   isLoading: false,
 };
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 export const addToCart = createAsyncThunk(
   "cart/addToCart",
   async ({ userId, productId, quantity }) => {
     const response = await axios.post(
-      "http://localhost:5000/api/shop/cart/add",
+      `${backendUrl}/api/shop/cart/add`,
       {
         userId,
         productId,

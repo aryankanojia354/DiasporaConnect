@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const initialState = {
   isLoading: false,
@@ -10,7 +11,7 @@ export const addNewAddress = createAsyncThunk(
   "/addresses/addNewAddress",
   async (formData) => {
     const response = await axios.post(
-      "http://localhost:5000/api/shop/address/add",
+      `${backendUrl}/api/shop/address/add`,
       formData
     );
 

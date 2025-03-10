@@ -11,6 +11,8 @@ import shopSearchSlice from "./shop/search-slice";
 import shopReviewSlice from "./shop/review-slice";
 import commonFeatureSlice from "./common-slice";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 const store = configureStore({
   reducer: {
     auth: authReducer,
