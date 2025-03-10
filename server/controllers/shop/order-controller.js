@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 
 dotenv.config(); // Load environment variables
 
-const backendUrl = process.env.VITE_BACKEND_URL; // ✅ Correct way to access environment variables
+const backendUrl = process.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 const createOrder = async (req, res) => {
   try {
