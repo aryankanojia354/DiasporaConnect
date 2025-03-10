@@ -42,6 +42,9 @@ function GuestHomePage() {
   const navigate = useNavigate();
   const { toast } = useToast();
 
+  // Simple check for authentication. Adjust if you're storing auth info differently.
+  const isLoggedIn = !!localStorage.getItem("token");
+
   // Navigate to listing page with filters
   function handleNavigateToListingPage(getCurrentItem, section) {
     sessionStorage.removeItem("filters");
@@ -51,12 +54,28 @@ function GuestHomePage() {
   }
 
   const handleGetProductDetails = (productId) => {
+    if (!isLoggedIn) {
+      toast({
+        title: "Please Login",
+        description: "Please login or register to view product details.",
+      });
+      navigate("/auth/login");
+      return;
+    }
     dispatch(fetchProductDetails(productId));
     // Navigate to product details page (or open a modal)
     navigate(`/shop/product/${productId}`);
   };
 
   const handleAddToCart = (productId) => {
+    if (!isLoggedIn) {
+      toast({
+        title: "Please Login",
+        description: "Please login or register to add items to your cart.",
+      });
+      navigate("/auth/login");
+      return;
+    }
     dispatch(addToCart(productId));
     toast({
       title: "Added to Cart",
@@ -150,7 +169,9 @@ function GuestHomePage() {
             {categoriesWithIcon.map((categoryItem) => (
               <Card
                 key={categoryItem.id}
-                onClick={() => handleNavigateToListingPage(categoryItem, "category")}
+                onClick={() =>
+                  handleNavigateToListingPage(categoryItem, "category")
+                }
                 className="cursor-pointer hover:shadow-lg transition-shadow bg-white"
               >
                 <CardContent className="flex flex-col items-center justify-center p-6">
@@ -171,7 +192,9 @@ function GuestHomePage() {
             {brandsWithIcon.map((brandItem) => (
               <Card
                 key={brandItem.id}
-                onClick={() => handleNavigateToListingPage(brandItem, "brand")}
+                onClick={() =>
+                  handleNavigateToListingPage(brandItem, "brand")
+                }
                 className="cursor-pointer hover:shadow-lg transition-shadow bg-white"
               >
                 <CardContent className="flex flex-col items-center justify-center p-6">
@@ -187,7 +210,9 @@ function GuestHomePage() {
       {/* Featured Products */}
       <section className="py-12 bg-white flex-grow">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">Featured Products</h2>
+          <h2 className="text-3xl font-bold text-center mb-8">
+            Featured Products
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
             {productList?.map((productItem) => (
               <ShoppingProductTile
@@ -257,7 +282,9 @@ function GuestHomePage() {
               </ul>
             </div>
             <div className="text-left">
-              <h4 className="font-semibold mb-3 text-indigo-900">Customer Service</h4>
+              <h4 className="font-semibold mb-3 text-indigo-900">
+                Customer Service
+              </h4>
               <ul className="space-y-1">
                 <li>
                   <a
