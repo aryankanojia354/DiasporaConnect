@@ -8,7 +8,7 @@ function AuthLayout() {
         <div
           className="absolute inset-0 bg-cover bg-center transform transition-transform duration-700 hover:scale-110"
           style={{
-            backgroundImage: "url('/public/assets/registerimage.jpg')",
+            backgroundImage: "url('/assets/registerimage.jpg')",
           }}
         />
         <div className="relative z-10 max-w-md space-y-6 text-center text-white">
