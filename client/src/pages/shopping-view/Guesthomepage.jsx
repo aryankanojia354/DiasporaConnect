@@ -54,13 +54,13 @@ function GuestHomePage() {
   }
 
   // Product details can be viewed by anyone (authentication not required)
-  const handleGetProductDetails = (productId) => {
-    dispatch(fetchProductDetails(productId));
-    navigate(`/shop/product/${productId}`);
+  const handleGetProductDetails = (prodId) => {
+    dispatch(fetchProductDetails(prodId));
+    navigate(`/shop/product/${prodId}`);
   };
 
   // Add to cart requires authentication
-  const handleAddToCart = (productId) => {
+  const handleAddToCart = (prodId) => {
     if (!isLoggedIn) {
       toast({
         title: "Please Login",
@@ -69,7 +69,7 @@ function GuestHomePage() {
       navigate("/auth/login");
       return;
     }
-    dispatch(addToCart(productId));
+    dispatch(addToCart(prodId));
     toast({
       title: "Added to Cart",
       description: "Product added to your cart successfully!",
@@ -79,8 +79,8 @@ function GuestHomePage() {
   // Auto-slide effect for carousel
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prevSlide) =>
-        (prevSlide + 1) % (featureImageList?.length || 1)
+      setCurrentSlide((prev) =>
+        (prev + 1) % (featureImageList?.length || 1)
       );
     }, 15000);
     return () => clearInterval(timer);
@@ -134,8 +134,8 @@ function GuestHomePage() {
           size="icon"
           onClick={() =>
             setCurrentSlide(
-              (prevSlide) =>
-                (prevSlide - 1 + featureImageList.length) % featureImageList.length
+              (prev) =>
+                (prev - 1 + featureImageList.length) % featureImageList.length
             )
           }
           className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/80"
@@ -146,7 +146,7 @@ function GuestHomePage() {
           variant="outline"
           size="icon"
           onClick={() =>
-            setCurrentSlide((prevSlide) => (prevSlide + 1) % featureImageList.length)
+            setCurrentSlide((prev) => (prev + 1) % featureImageList.length)
           }
           className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/80"
         >
