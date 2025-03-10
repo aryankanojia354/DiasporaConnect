@@ -4,7 +4,9 @@ import { loginFormControls } from "@/config";
 import { loginUser } from "@/store/auth-slice";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import registerImage from "@/assets/registerimage.jpg"; // Use alias or relative path
+
 
 const initialState = {
   email: "",
@@ -13,45 +15,57 @@ const initialState = {
 
 function AuthLogin() {
   const [formData, setFormData] = useState(initialState);
+  const [loading, setLoading] = useState(false); // Added loading state
   const dispatch = useDispatch();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const { isAuthenticated } = useSelector((state) => state.auth);
 
-  // Redirect to home when the back button is pressed
+  // Handle back button press (navigate instead of reloading)
   useEffect(() => {
-    window.history.pushState(null, '', window.location.href);
+    window.history.pushState(null, "", window.location.href);
 
     const handleBackButton = () => {
-      window.location.href = '/';
+      navigate("/");
     };
 
-    window.addEventListener('popstate', handleBackButton);
+    window.addEventListener("popstate", handleBackButton);
 
     return () => {
-      window.removeEventListener('popstate', handleBackButton);
+      window.removeEventListener("popstate", handleBackButton);
     };
-  }, []);
+  }, [navigate]);
 
   // Redirect to home if the user is already authenticated
   if (isAuthenticated) {
     return <Navigate to="/" replace />;
   }
 
-  function onSubmit(event) {
+  async function onSubmit(event) {
     event.preventDefault();
 
-    dispatch(loginUser(formData)).then((data) => {
-      if (data?.payload?.success) {
-        toast({
-          title: data?.payload?.message,
-        });
-      } else {
-        toast({
-          title: data?.payload?.message,
-          variant: "destructive",
-        });
-      }
-    });
+    if (!formData.email || !formData.password) {
+      toast({
+        title: "Please fill in all fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      setLoading(true); // Start loading
+      const data = await dispatch(loginUser(formData)).unwrap();
+
+      toast({ title: data.message });
+
+    } catch (error) {
+      toast({
+        title: error?.message || "Login failed",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false); // Stop loading
+    }
   }
 
   return (
@@ -72,10 +86,11 @@ function AuthLogin() {
       </div>
       <CommonForm
         formControls={loginFormControls}
-        buttonText={"Sign In"}
+        buttonText={loading ? "Signing In..." : "Sign In"} // Show loading state
         formData={formData}
         setFormData={setFormData}
         onSubmit={onSubmit}
+        disabled={loading} // Disable form when loading
       />
     </div>
   );
