@@ -1,13 +1,10 @@
+import React from "react";
 import { Card, CardContent, CardFooter } from "../ui/card";
 import { Button } from "../ui/button";
 import { brandOptionsMap, categoryOptionsMap } from "@/config";
 import { Badge } from "../ui/badge";
 
-function ShoppingProductTile({
-  product,
-  handleGetProductDetails,
-  handleAddtoCart,
-}) {
+function ShoppingProductTile({ product, handleGetProductDetails, handleAddToCart }) {
   return (
     <Card className="w-full max-w-sm mx-auto">
       {/* Clickable container for product details */}
@@ -53,11 +50,11 @@ function ShoppingProductTile({
             >
               ${product?.price}
             </span>
-            {product?.salePrice > 0 ? (
+            {product?.salePrice > 0 && (
               <span className="text-lg font-semibold text-primary">
                 ${product?.salePrice}
               </span>
-            ) : null}
+            )}
           </div>
         </CardContent>
       </div>
@@ -70,7 +67,7 @@ function ShoppingProductTile({
           <Button
             onClick={(e) => {
               e.stopPropagation(); // Prevents the parent onClick from firing
-              handleAddtoCart(product?._id, product?.totalStock);
+              handleAddToCart(product?._id, product?.totalStock);
             }}
             className="w-full"
           >
